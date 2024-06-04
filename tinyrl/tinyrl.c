@@ -86,7 +86,8 @@ tinyrl_key_default(tinyrl_t *this,
     }
     else
     {
-        char tmp[10];
+        /* Fix build error */
+        char tmp[16];
         sprintf(tmp,"~%d",key);
         /* inject control characters as ~N where N is the ASCII code */
         result = tinyrl_insert_text(this,tmp);
@@ -912,7 +913,8 @@ tinyrl_insert_text(tinyrl_t   *this,
                 
 
     /* insert the new text */
-    strncpy(&this->buffer[this->point],text,delta);
+    /* Fixed build error */
+    memcpy(&this->buffer[this->point],text,delta);
     
     /* now update the indexes */
     this->point += delta;
